@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+<pre>
+    <span class="badge badge-info pull-right" rel="tooltip" data-placement="auto bottom" data-title="Add this to your 'composer.json' to require packages from this server.">?</span>
+<code>{{ config|json_encode(constant('JSON_PRETTY_PRINT')) }}</code>
+</pre>
+
+    <a href="{{ path('repository_new') }}" class="btn btn-large btn-block btn-primary">
+        <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
+        Add a new repository
+    </a>
+
+    <a href="{{ path('repository_upload') }}" class="btn btn-large btn-block btn-primary">
+        <i class="glyphicon glyphicon-upload" aria-hidden="true"></i>
+        Add all repositories from a composer.lock
+    </a>
+
+    <a href="{{ path('configuration') }}" class="btn btn-large btn-block btn-primary">
+        <i class="glyphicon glyphicon-check" aria-hidden="true"></i>
+        Edit configuration
+    </a>
+    <a href="{{ path('satis_build') }}" class="btn btn-large btn-block btn-primary">
+        <i class="glyphicon glyphicon-refresh" aria-hidden="true"></i>
+        Build packages
+    </a>
+
+    <ul class="nav nav-pills nav-stacked">
+    {% for repository in repositories %}
+        <li>
+            <a href="{{ path('repository_edit', {'repository': repository.id }) }}">
+                {{ repository.url }}
+            </a>
+        </li>
+    {% endfor %}
+    </ul>
+{% endblock %}
+
+

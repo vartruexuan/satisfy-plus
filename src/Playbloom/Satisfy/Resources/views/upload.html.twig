@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}New repository{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+        <h2 class="form-signin-heading">
+            Upload composer.lock
+        </h2>
+
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+
+        {{ form_errors(form) }}
+
+        {{ form_errors(form.file) }}
+        {{ form_widget(form.file) }}
+
+        <button class="btn btn-large btn-block btn-primary" type="submit">Upload</button>
+    </form>
+{% endblock %}

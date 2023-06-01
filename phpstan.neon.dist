@@ -1,0 +1,17 @@
+parameters:
+	level: 5
+	paths:
+		- src
+		- tests
+	fileExtensions:
+		- php
+	symfony:
+		container_xml_path: var/cache/test/srcTestKernelTestDebugContainer.xml
+	ignoreErrors:
+		- '#Call to an undefined method Prophecy\\Prophecy\\ObjectProphecy::.+\(\)#'
+	inferPrivatePropertyTypeFromConstructor: true
+
+includes:
+	- vendor/phpstan/phpstan-phpunit/extension.neon
+	- vendor/phpstan/phpstan-phpunit/rules.neon
+	- vendor/phpstan/phpstan-symfony/extension.neon

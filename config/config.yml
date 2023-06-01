@@ -1,0 +1,22 @@
+imports:
+  - { resource: parameters.yml }
+  - { resource: security.yml }
+
+parameters:
+  container.autowiring.strict_mode: true
+
+framework:
+  secret: "%secret%"
+  session: ~
+  templating:
+    engines: ['twig']
+  assets: ~
+  profiler:
+    collect: false
+  lock:
+    resources:
+      satis: "flock"
+      build: "flock"
+
+twig:
+  form_themes: ['bootstrap_3_layout.html.twig']

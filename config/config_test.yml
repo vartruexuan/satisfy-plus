@@ -1,0 +1,16 @@
+imports:
+  - { resource: config.yml }
+  - { resource: parameters.test.yml }
+
+framework:
+  test: ~
+  session:
+    storage_id: session.storage.mock_file
+  profiler:
+    collect: false
+
+services:
+  logger:
+    class: Psr\Log\Test\TestLogger
+  twig.exception_listener:
+    class: stdClass

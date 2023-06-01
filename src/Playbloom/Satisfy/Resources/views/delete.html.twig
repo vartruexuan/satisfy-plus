@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Delete repository{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+        <h2 class="form-signin-heading">
+            Delete repository ?
+        </h2>
+
+        <div class="control-group error">
+            <input type="text" disabled="disabled" value="{{ repository.url }}" class="input-block-level"/>
+        </div>
+
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+
+        <button class="btn btn-large btn-block btn-danger" type="submit" name="delete_form[submit]">
+            Confirm deletion</button>
+        <a href="{{ path('repository') }}" class="btn btn-large btn-block btn-inverse" >Cancel</a>
+    {{ form_end(form) }}
+{% endblock %}

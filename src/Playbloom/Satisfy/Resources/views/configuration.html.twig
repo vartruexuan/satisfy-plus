@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+{% form_theme form 'form/jquery.collection.html.twig' 'form/fields.html.twig' %}
+
+{% block title %}Edit configuration{% endblock %}
+
+{% block content %}
+    {{ form_start(form, { attr: { class: 'form-horizontal' }}) }}
+    <h2 class="form-signin-heading">Edit configuration</h2>
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-large btn-block btn-primary" type="submit">Submit</button>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{ asset('js/jquery.collection.js') }}"></script>
+    <script type="text/javascript">
+        $(".collection_require").collection({
+            add: '<p class="col-sm-2"><button class="btn btn-default"><i class="glyphicon glyphicon-plus"></i></button></p>',
+            remove: '<button class="btn btn-default"><i class="glyphicon glyphicon-minus"></i></button>',
+            allow_down: false,
+            allow_up: false,
+            add_at_the_end: true
+        });
+    </script>
+{% endblock %}

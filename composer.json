@@ -1,0 +1,85 @@
+{
+    "name": "perpower/satisfy-plus",
+    "license": "MIT",
+    "type": "project",
+    "keywords": ["satis", "composer", "backend", "ui", "packagist", "static-packagist"],
+    "description": "Satis composer repository manager with a Web UI",
+    "authors": [
+        {
+            "name": "guozhaoxuan",
+            "email": "guozhaoxuanx@163.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.3||^8.0",
+        "ext-json": "*",
+        "ext-xml": "*",
+        "composer/composer": "^2.1",
+        "composer/satis": "dev-main",
+        "doctrine/annotations": "~1.6",
+        "doctrine/instantiator": "~1.1",
+        "incenteev/composer-parameter-handler": "^2.1",
+        "ninsuo/symfony-collection": "^2.1",
+        "ramunasd/symfony-container-mocks": "^0.6.0",
+        "swop/github-webhook": "^3.1",
+        "symfony/asset": "^4.4",
+        "symfony/form": "^4.4",
+        "symfony/framework-bundle": "^4.4",
+        "symfony/lock": "^4.4",
+        "symfony/property-info": "^5.0",
+        "symfony/psr-http-message-bridge": "^2.0",
+        "symfony/security-bundle": "^4.4",
+        "symfony/serializer": "^5.0",
+        "symfony/templating": "^4.4",
+        "symfony/twig-bundle": "^4.4",
+        "symfony/validator": "^4.4",
+        "symfony/yaml": "^4.4",
+        "laminas/laminas-diactoros": "^2.3"
+    },
+    "require-dev": {
+        "symfony/browser-kit": "^4.4",
+        "mikey179/vfsstream": "^1.6",
+        "friendsofphp/php-cs-fixer": "^3.1",
+        "phpstan/phpstan": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.0",
+        "phpstan/phpstan-symfony": "^1.0",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": { "Playbloom\\Satisfy\\": "src/Playbloom/Satisfy" },
+        "files": ["src/Kernel.php"]
+    },
+    "autoload-dev": {
+        "psr-4": { "Tests\\": "tests" },
+        "files": ["src/TestKernel.php"]
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+        ],
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
+        ],
+        "test": [
+            "@phpunit",
+            "@phpstan",
+            "@php-cs-fixer"
+        ],
+        "phpunit": "phpunit",
+        "phpstan": "phpstan analyse",
+        "php-cs-fixer": "php-cs-fixer fix --diff --show-progress=dots"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        },
+        "incenteev-parameters": {
+            "file": "config/parameters.yml"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}
