@@ -1,0 +1,39 @@
+<IfModule mod_rewrite.c>
+    Options -MultiViews +Indexes
+    
+    RewriteEngine On
+
+    # Determine the RewriteBase automatically and set it as environment variable.
+    RewriteCond %{REQUEST_URI}::$1 ^(/.+)/(.*)::\2$
+    RewriteRule ^(.*) - [E=BASE:%1]
+
+    # Set the HTTP_AUTHORIZATION header removed by apache as environment variable.
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect to URI without front controller to prevent duplicate content.
+    # We only do this redirect on the initial rewrite to prevent endless redirect loops.
+    RewriteCond %{ENV:REDIRECT_STATUS} ^$
+    RewriteRule ^index\.php(/(.*)|$) %{ENV:BASE}/$2 [R=301,L]
+
+    # If the requested filename exists or should exist, simply serve it.
+    RewriteCond %{REQUEST_FILENAME} -s [OR]
+    RewriteCond %{REQUEST_FILENAME} -l [OR]
+    RewriteCond %{REQUEST_FILENAME} -d [OR]
+    RewriteCond %{REQUEST_URI} =/favicon.ico [OR]
+    RewriteCond %{REQUEST_URI} =/robots.txt
+    RewriteRule .? - [L]
+
+    # Rewrite all other queries to the front controller.
+    RewriteRule .? %{ENV:BASE}/index.php [QSA,L]
+</IfModule>
+
+#Compress JSON files
+<IfModule mod_headers.c>
+    <IfModule mod_deflate.c>
+        <IfModule mod_filter.c>
+            SetOutputFilter DEFLATE
+            AddOutputFilterByType DEFLATE application/json
+        </IfModule>
+    </IfModule>
+</IfModule>
